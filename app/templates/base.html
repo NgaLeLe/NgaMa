@@ -4,12 +4,29 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Sécurité routière</title>
-	
+
 	<link rel="stylesheet" href="{{url_for('static', filename='bootstrap.min.css')}}">
 	<link rel="stylesheet" href="{{url_for('static', filename='bootstrap.css')}}">
 	<link rel="stylesheet" type="text/css" href="/static/style.css" />
 	<link rel="manifest" href="{{ url_for('static', filename='manifest.webmanifest') }}">
 	<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" />
+
+ <!--   
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+ -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>   
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	crossorigin="anonymous"></script>
+	
+<!-- 
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+-->
+	
+ 
 </head>
 
 
@@ -39,8 +56,24 @@
 		</footer> 
 	</div>
 	<script type="text/javascript">
-	if('serviceWorker' in navigator) {
-    navigator.serviceWorker.register("/sw.js");
-	};
-</script>
+		if('serviceWorker' in navigator) {
+		navigator.serviceWorker.register("/sw.js");
+		};
+		$.getJSON('static/donnees/departments_FR.json', function(departments){
+			if (departments === undefined || departments.length === 0) 
+				return
+			var select = document.getElementById("departementId");
+		
+			for(let dpt of departments) {
+				var option = document.createElement("option");
+				option.value = dpt.departmentCode;
+				option.innerHTML = dpt.departmentCode + " - " + dpt.departmentName  ;
+				select.appendChild(option);
+			}
+		});
+    </script>
+	<script>
+		
+	</script>
+	
 </html>
